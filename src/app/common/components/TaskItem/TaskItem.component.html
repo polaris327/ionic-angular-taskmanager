@@ -1,0 +1,53 @@
+<ion-item
+  class="app-task-list-item ion-flex-row ion-justify-content-start ion-no-padding item-outlined ion-full-width"
+>
+  <ion-item class="ion-no-padding item-border-left item-details" clickable (click)="selectItem()">
+    <ion-grid>
+      <ion-row class="ion-justify-content-space-between">
+        <ion-col>
+          <ion-label>{{ task.title }}</ion-label>
+        </ion-col>
+
+        <ion-col class="ion-text-right">
+          <ion-note class="item-total-amount">{{ getPriceWithCurrency('pounds', totalPrice) }}</ion-note>
+        </ion-col>
+      </ion-row>
+
+      <ion-grid class="ion-border-bottom">
+        <ion-row>
+          <ion-col class="ion-text-left ion-tiny-text">
+            <ion-note>Time</ion-note>
+          </ion-col>
+          <ion-col class="ion-text-left ion-tiny-text">
+            <ion-note>Cost</ion-note>
+          </ion-col>
+          <ion-col class="ion-text-left ion-tiny-text">
+            <ion-note>Profit</ion-note>
+          </ion-col>
+          <ion-col class="ion-text-left ion-tiny-text">
+            <ion-note>Vat</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-row>
+        <ion-col class="ion-text-left">
+          <ion-note>{{ task.time + ' ' + task.timeUnit }}</ion-note>
+        </ion-col>
+        <ion-col class="ion-text-left">
+          <ion-note color="danger">{{ getPriceWithCurrency('pounds', task.cost) }}</ion-note>
+        </ion-col>
+        <ion-col class="ion-text-left">
+          <ion-note color="success">{{ getPriceWithCurrency('pounds', profit) }}</ion-note>
+        </ion-col>
+        <ion-col class="ion-text-left">
+          <ion-note>{{ getPriceWithCurrency('pounds', vatAmount) }}</ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  
+  <ion-button class="ion-no-background" color="#ffffff" (click)="removeItem()">
+    <ion-icon color="danger" name="trash-bin"></ion-icon>
+  </ion-button>
+</ion-item>

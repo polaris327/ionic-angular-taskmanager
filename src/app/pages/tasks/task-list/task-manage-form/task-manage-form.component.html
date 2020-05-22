@@ -1,0 +1,146 @@
+<form (ngSubmit)="logForm()" class="manage-form-container">
+  <ion-item lines="none" class="ion-full-width ion-no-border">
+    <ion-label class="ion-text-left ion-no-margin ion-margin-top">Task name:</ion-label>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-no-border">
+    <ion-input
+      type="text"
+      name="title"
+      [(ngModel)]="newTask.title"
+      class="ion-full-width ion-outlined"
+    ></ion-input>
+  </ion-item>
+
+  <ion-grid class="ion-no-padding ion-padding-start">
+    <ion-row class="padding-left-small">
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none" class="ion-full-width ion-no-border ion-no-padding">
+          <ion-label class="ion-text-left ion-no-margin ion-margin-top">Task cost(£):</ion-label>
+          <ion-note class="ion-no-margin ion-margin-top">(Optional)</ion-note>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-no-border ion-no-padding">
+          <ion-input
+            type="number"
+            name="cost"
+            [(ngModel)]="newTask.cost"
+            class="ion-full-width ion-outlined"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none" class="ion-full-width ion-no-border ion-no-padding">
+          <ion-label class="ion-text-left ion-no-margin ion-margin-top">Task price(£):</ion-label>
+          <ion-note class="ion-no-margin ion-margin-top">(Optional)</ion-note>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-no-border ion-no-padding">
+          <ion-input
+            type="number"
+            name="price"
+            [(ngModel)]="newTask.price"
+            class="ion-full-width ion-outlined"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border ion-justify-content-between">
+    <ion-label class="ion-text-left ion-no-margin ion-margin-top">VAT rate:</ion-label>
+    <ion-note class="ion-no-margin ion-margin-top">(Optional)</ion-note>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-no-border">
+    <ion-select
+      [(ngModel)]="newTask.vatRate"
+      name="vatRate"
+      okText="Ok"
+      cancelText="Cancel"
+      class="ion-full-width ion-outlined"
+    >
+      <ion-select-option value="0">0%</ion-select-option>
+      <ion-select-option value="5">5%</ion-select-option>
+      <ion-select-option value="20">20%</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border ion-justify-content-between">
+    <ion-label class="ion-text-left ion-no-margin ion-margin-top">Estimated task duration:</ion-label>
+    <ion-note class="ion-no-margin ion-margin-top">(Optional)</ion-note>
+  </ion-item>
+
+  <ion-grid class="ion-no-padding ion-padding-start">
+    <ion-row class="padding-left-small">
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none" class="ion-no-padding">
+          <ion-button color="primary" class="counter-button" (click)="onDecrease()">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+          <ion-input
+            type="number"
+            name="time"
+            [(ngModel)]="newTask.time"
+            class="ion-outlined"
+          ></ion-input>
+          <ion-button color="primary" class="counter-button" (click)="onIncrease()">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none" class="ion-no-border ion-no-padding">
+          <ion-select
+            [(ngModel)]="newTask.timeUnit"
+            name="timeUnit"
+            okText="Ok"
+            cancelText="Cancel"
+            class="ion-full-width ion-outlined"
+          >
+            <ion-select-option value="Hours">HOURS</ion-select-option>
+            <ion-select-option value="Days">DAYS</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border ion-justify-content-between">
+    <ion-label class="ion-text-left ion-no-margin ion-margin-top">Linked with Contact from Address Book:</ion-label>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border">
+    <input
+      class="input-height ion-full-width ion-outlined"
+      list="address-book"
+      placeholder=""
+      name="address"
+      [(ngModel)]="newTask.address"
+    >
+    <datalist *ngIf="address && address.length" id="address-book" [(ngModel)]="newTask.address">
+      <option *ngFor="let contact of address" [value]="contact.name"></option>
+    </datalist>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border ion-justify-content-between">
+    <ion-button
+      color="light"
+      class="ion-full-width ion-text-center input-height ion-margin-top"
+      (click)="cancelForm()"
+    >
+      Cancel
+    </ion-button>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-full-width ion-no-border ion-justify-content-between">
+    <ion-button
+      color="danger"
+      class="ion-full-width ion-text-center input-height ion-margin-top"
+      (click)="updateTask()"
+      [disabled]="!newTask.title"
+    >
+      Save
+    </ion-button>
+  </ion-item>
+</form>

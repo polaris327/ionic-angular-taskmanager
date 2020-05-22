@@ -1,0 +1,40 @@
+.ion-list-padding {
+  padding: 0 4px;
+  margin: 4px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+}
+
+.app-task-list-item {
+  margin: 4px 0;
+}
+
+.ion-full-width {
+  width: 100% !important;
+  min-width: 100%;
+}
+
+.ion-list-total {
+  border-top: 1px solid #92949c;
+
+  ion-note {
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
+ion-item-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  ion-item {
+    display: inline-flex;
+  }
+
+  ion-note {
+    font-weight: 700;
+    min-width: 80px;
+    text-align: right;
+  }
+}

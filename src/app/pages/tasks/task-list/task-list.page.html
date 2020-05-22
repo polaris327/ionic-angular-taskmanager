@@ -1,0 +1,52 @@
+<ion-content fullscreen *ngIf="!showEditForm && !showAddForm">
+  <ion-fab *ngIf="!tasks || tasks.length === 0" vertical="center" horizontal="center" slot="fixed">
+    <ion-note>No tasks present</ion-note>
+  </ion-fab>
+  <ion-list *ngIf="tasks && tasks.length > 0" class="ion-list-padding">
+    <app-task-list-item
+      *ngFor="let task of tasks; let i = index;"
+      [task]="task"
+      [index]="i"
+      (onRemove)="removeTask($event)"
+      (onSelect)="onSelectTask($event)"
+    ></app-task-list-item>
+  </ion-list>
+  <ion-item-group *ngIf="tasks && tasks.length > 0" class="ion-margin-top ion-text-right">
+    <ion-item class="ion-justify-content-end" lines="none">
+      <ion-note class="ion-margin-end">Total labour cost:</ion-note>
+      <ion-note color="danger">{{ getTotalCost() }}</ion-note>
+    </ion-item>
+
+    <ion-item class="ion-justify-content-end" lines="none">
+      <ion-note class="ion-margin-end">Total labour profit:</ion-note>
+      <ion-note color="success">{{ getTotalProfit() }}</ion-note>
+    </ion-item>
+
+    <ion-item class="ion-justify-content-end" lines="none">
+      <ion-note class="ion-margin-end">Subtotal:</ion-note>
+      <ion-note>{{ getSubTotal() }}</ion-note>
+    </ion-item>
+
+    <ion-item class="ion-justify-content-end" lines="none">
+      <ion-note class="ion-margin-end">VAT:</ion-note>
+      <ion-note>{{ getVat() }}</ion-note>
+    </ion-item>
+
+    <ion-item class="ion-justify-content-end ion-margin-top ion-list-total" lines="none">
+      <ion-note class="ion-margin-end ion-margin-top" color="dark">Total labour price:</ion-note>
+      <ion-note color="primary" class="ion-margin-top">{{ getTotalPrice() }}</ion-note>
+    </ion-item>
+  </ion-item-group>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <app-common-add-button (onAdd)="toggleAddForm()"></app-common-add-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content fullscreen *ngIf="showAddForm || showEditForm">
+  <app-task-manage-form
+    [selectedTask]="formType === 'add' ? addingTask : selectedTask"
+    [formType]="formType"
+    (onSubmit)="onSubmitTask($event)"
+    (onCancel)="onCancelForm()"
+  ></app-task-manage-form>
+</ion-content>
